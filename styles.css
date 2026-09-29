@@ -1,0 +1,64 @@
+*{box-sizing:border-box}
+body{margin:0;background:#0b1120;color:#e5e7eb;font-family:system-ui,sans-serif}
+header{padding:22px 4vw;border-bottom:1px solid #263244;display:flex;justify-content:space-between}
+h1{margin:0}
+h2{font-size:1.1rem}
+p{color:#94a3b8}
+.off,.on{padding:7px 11px;border-radius:99px;height:max-content}
+.off{background:#3f1d1d;color:#fecaca}
+.on{background:#064e3b;color:#a7f3d0}
+main{width:min(1200px,92vw);margin:24px auto;display:grid;gap:18px}
+.card{background:#111827;border:1px solid #263244;border-radius:15px;padding:18px}
+.row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:12px}
+label{display:grid;gap:6px;flex:1;min-width:150px;color:#cbd5e1}
+input,select,button{font:inherit}
+input,select{padding:9px;background:#0f172a;color:#e5e7eb;border:1px solid #374151;border-radius:9px}
+button{padding:10px 14px;border-radius:99px;border:1px solid #374151;background:#1f2937;color:#e5e7eb}
+button:disabled{opacity:.45}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.metrics span{display:block;color:#94a3b8;font-size:.82rem}
+.metrics strong{font-size:1.5rem}
+.metrics small{color:#94a3b8;margin-left:5px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:15px}
+canvas{width:100%;height:360px;background:#0b1220;border-radius:12px}
+.equation{padding:15px;background:#0b1220;border-radius:10px;font-family:monospace;overflow:auto}
+
+/* Panel de estadísticas cuando se selecciona en el menú desplegable */
+.stats-panel{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  margin-top:12px;
+}
+.stat-box{
+  background:#0b1220;
+  border:1px solid #263244;
+  border-radius:10px;
+  padding:14px;
+}
+.stat-box span{
+  display:block;
+  color:#94a3b8;
+  font-size:.85rem;
+  margin-bottom:4px;
+}
+.stat-box strong{
+  font-size:1.4rem;
+  color:#f59e0b;
+}
+.stat-box small{
+  color:#94a3b8;
+  margin-left:4px;
+}
+
+.tablewrap{max-height:320px;overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #263244;text-align:right}
+th{position:sticky;top:0;background:#172033}
+footer{text-align:center;color:#64748b;padding:20px}
+
+@media(max-width:760px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .head{align-items:flex-start;flex-direction:column}
+  .stats-panel{grid-template-columns:repeat(1,1fr)}
+}

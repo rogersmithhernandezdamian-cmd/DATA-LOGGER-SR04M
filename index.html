@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg">
+  <title>SR04T Wi-Fi Monitor</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>SR04T Wi-Fi Monitor</h1>
+    <p>ESP32-C3 · Wi-Fi · Distancia vs. tiempo</p>
+  </div>
+  <span id="badge" class="off">Desconectado</span>
+</header>
+<main>
+  <section class="card">
+    <div class="row">
+      <label>IP del ESP32<input id="ip" placeholder="192.168.1.50"></label>
+      <label>Puerto<input id="port" value="81" type="number"></label>
+      <button id="connect">Conectar</button>
+      <button id="disconnect" disabled>Desconectar</button>
+    </div>
+    <div class="row">
+      <label>Intervalo (ms)<input id="interval" type="number" value="100" min="50" max="5000"></label>
+      <label>Ventana (s)<input id="window" type="number" value="120"></label>
+      <button id="start" disabled>▶ Iniciar</button>
+      <button id="pause" disabled>⏸ Pausar</button>
+      <button id="clear">Borrar</button>
+    </div>
+    <p id="status">Introduce la IP mostrada por el monitor serie.</p>
+  </section>
+
+  <section class="metrics">
+    <div class="card"><span>Distancia</span><strong id="distance">—</strong><small>cm</small></div>
+    <div class="card"><span>Tiempo</span><strong id="time">0.00</strong><small>s</small></div>
+    <div class="card"><span>Muestras</span><strong id="count">0</strong></div>
+    <div class="card"><span>Promedio</span><strong id="avg">—</strong><small>cm</small></div>
+  </section>
+
+  <section class="card">
+    <div class="head">
+      <div>
+        <h2>Distancia vs. tiempo</h2>
+        <p>WebSocket en tiempo real.</p>
+      </div>
+      <button id="csv" disabled>Exportar CSV</button>
+    </div>
+    <canvas id="chart"></canvas>
+  </section>
+
+  <!-- Sección de Ajuste de Curva / Estadística -->
+  <section class="card">
+    <div class="head">
+      <h2 id="analysis-title">Ajuste de curva</h2>
+      <select id="degree">
+        <option value="1">Lineal</option>
+        <option value="2">Cuadrática</option>
+        <option value="3">Cúbica</option>
+        <option value="4">Grado 4</option>
+        <option value="5">Grado 5</option>
+        <option value="stats">Estadística</option>
+      </select>
+    </div>
+
+    <!-- Panel de Resultados del Ajuste de Curva -->
+    <div id="fit-panel">
+      <div id="equation" class="equation">Sin datos.</div>
+      <p>R²: <b id="r2">—</b> · RMSE: <b id="rmse">—</b> cm</p>
+      <div id="coeff"></div>
+    </div>
+
+    <!-- Panel de Estadística (se muestra sólo cuando se elige 'Estadística') -->
+    <div id="stats-panel" class="stats-panel" style="display: none;">
+      <div class="stat-box">
+        <span>Promedio</span>
+        <strong id="stat-avg">—</strong>
+        <small>cm</small>
+      </div>
+      <div class="stat-box">
+        <span>Máximo</span>
+        <strong id="stat-max">—</strong>
+        <small>cm</small>
+      </div>
+      <div class="stat-box">
+        <span>Mínimo</span>
+        <strong id="stat-min">—</strong>
+        <small>cm</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Datos</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Tiempo (s)</th><th>Distancia (cm)</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer>ESP32-C3 + SR04T · Wi-Fi WebSocket · PWA</footer>
+<script src="./app.js"></script>
+</body>
+</html>
